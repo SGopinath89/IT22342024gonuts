@@ -1,0 +1,12 @@
+.all-category{
+    background-color: #f4c5d8;
+    margin: 1px auto;
+    height: 100vh;
+    background-size: contain;
+    position: relative;
+    display: flex;
+}
+
+.card img{
+    width: 200px;
+}

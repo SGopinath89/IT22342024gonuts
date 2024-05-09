@@ -1,0 +1,8 @@
+.popular{
+    background-color: #fff4ca;
+    margin: 1px auto;
+    height: 70vh;
+    background-size: contain;
+    position: relative;
+    display: flex;
+}

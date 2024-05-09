@@ -1,19 +1,27 @@
-.navbar{
-    padding: 20px 0px;
+.navbar {
+    padding: 10px;
     padding-left: 20px;
-    padding-right: 20px;
-    
+    padding-right: 20px; 
     display: flex;
     justify-content: space-between;
     align-items: center;
     background-color: #FFEDAA;
 }
 
-.navbar .logo{
+.navbar.pink {
+    background-color: #E99BBC; /* Change background color to pink when .pink class is present */
+}
+
+
+.navbar.yellow {
+    background-color: #DDC678; /* Change background color to pink when .pink class is present */
+}
+
+.navbar .logo {
     width: 200px;
 }
 
-.navbar-menu{
+.navbar-menu {
     display: flex;
     list-style: none;
     gap: 20px;
@@ -21,9 +29,36 @@
     font-size: 18px;
 }
 
-.navbar-right{
+.navbar-right {
     display: flex;
     align-items: center;
     gap: 40px;
+}
 
+.navbar .active {
+    padding-bottom: 2px;
+    border-bottom: 2px solid #49557e;
+}
+
+.navbar-menu li {
+    cursor: pointer;
+}
+
+.navbar-search-icon {
+    position: relative;
+}
+
+.navbar-search-icon .dot {
+    position: absolute;
+    min-width: 10px;
+    min-height: 10px;
+    background-color: red;
+    border-radius: 5px;
+    top: 0px;
+    right: -8px;
+}
+
+.navbar-right img {
+    width: 40px;
+    height: 40px;
 }
