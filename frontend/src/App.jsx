@@ -6,6 +6,10 @@ import PlaceOrder from './pages/PlaceOrder/PlaceOrder'
 import Cart from './pages/Cart/Cart'
 import Footer from './components/Footer/Footer'
 import AllCategory from './components/AllCategory/AllCategory'
+import About from './components/About/About'
+import Category from './pages/Category/Category'
+import LoginSignup from './pages/LoginSignup/LoginSignup'
+import Product from './pages/Product/Product'
 
 const App = () => {
   return (
@@ -14,8 +18,16 @@ const App = () => {
       <Routes>
         <Route path='/' element={<Home/>} /> 
         <Route path='/allcategory' element={<AllCategory/>} />
+        <Route path='/donuts' element={<Category category="donuts"/>} />
+        <Route path='/iclairs' element={<Category category="iclairs"/>} />
+        <Route path='/cupcakes' element={<Category category="cupcakes"/>} />
+        <Route path='/about' element={<About/>} />
+        <Route path='/login' element={<LoginSignup/>} />
         <Route path='/cart' element={<Cart/>} />
         <Route path='/order' element={<PlaceOrder/>} />
+        <Route path="/product" element={<Product/>}>
+          <Route path=':productId' element={<Product/>}/>
+        </Route>
       </Routes>
 
       <Footer/>

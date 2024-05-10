@@ -1,6 +1,7 @@
 import React from 'react';
 import './Header.css';
 import { assets } from '../../assets/assets';
+import { Link } from 'react-router-dom';
 
 const Header = () => {
   return (
@@ -13,7 +14,7 @@ const Header = () => {
         <div className="header-right">
             <h1>Hello Sweet Lovers</h1>
             <p>Indulge in the exquisite delights of your favorite confections and let them serenade your senses with their sweet symphony</p>
-            <button>View Menu</button>  
+            <Link to='/allcategory'><button>View Menu</button></Link> 
         </div>
         
         

@@ -4,6 +4,12 @@
     justify-content: center;
     align-items: center;
     gap: 50px;
+    background-color: #f5edceef;
+    margin: 1px auto;
+    height: auto;
+    background-size: contain;
+    position: relative;
+    display: flex;
 }
 
 .footer-logo{
@@ -13,8 +19,8 @@
 }
 
 .footer-logo img{
-    width: 80px;
-    height: 80px;
+    width: 300px;
+    height: 100px;
 }
 
 .footer-logo p {
@@ -64,7 +70,7 @@
     border: none;
     border-radius: 10px;
     height: 3px;
-    background: #c7c7c7;
+    background: #e18c8c;
 }
 
 

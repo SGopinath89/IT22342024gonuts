@@ -16,11 +16,12 @@ const Navbar = () => {
         else if(menuItem === "about"){
             setNavbarColor("yellow");
         }
-
-        else{
+        else if(menuItem === "login"){
+            setNavbarColor("green");
+        }
+        else {
             setNavbarColor("");
         }
-        
     };
 
     return (
@@ -29,17 +30,16 @@ const Navbar = () => {
             <ul className="navbar-menu">
                 <li onClick={() => handleMenuClick("home")} className={menu === "home" ? "active" : ""}><Link to='/'>Home</Link></li>
                 <li onClick={() => handleMenuClick("menu")} className={menu === "menu" ? "active" : ""}><Link to='/allcategory'>Menu</Link></li>
-                <li onClick={() => handleMenuClick("about")} className={menu === "about" ? "active" : ""}>About</li>
+                <li onClick={() => handleMenuClick("about")} className={menu === "about" ? "active" : ""}><Link to='/about'>About</Link></li>
                 <li onClick={() => handleMenuClick("contact")} className={menu === "contact" ? "active" : ""}>Contact</li>
             </ul>
 
             <div className="navbar-right">
-                <img src={assets.search_icon} alt="" />
                 <div className="navbar-search-icon">
-                    <img src={assets.basket_icon} alt="" />
+                    <Link to='/cart'><img src={assets.basket_icon} alt="" /></Link>
                     <div className="dot"></div>
                 </div>
-                <img src={assets.profile_icon} alt="" />
+                <div onClick={() => handleMenuClick("login")}><Link to='/login'><img src={assets.profile_icon} alt="" /></Link></div>
             </div>
         </div>
     )

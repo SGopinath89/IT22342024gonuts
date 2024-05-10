@@ -17,6 +17,10 @@
     background-color: #DDC678; /* Change background color to pink when .pink class is present */
 }
 
+.navbar.green{
+    background-color: #DD7878;
+}
+
 .navbar .logo {
     width: 200px;
 }
