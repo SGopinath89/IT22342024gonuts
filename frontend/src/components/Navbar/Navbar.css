@@ -9,20 +9,24 @@
 }
 
 .navbar.pink {
-    background-color: #E99BBC; /* Change background color to pink when .pink class is present */
+    background-color: #f288b4af; /* Change background color to pink when .pink class is present */
 }
 
 
 .navbar.yellow {
-    background-color: #DDC678; /* Change background color to pink when .pink class is present */
+    background-color: #ddc678ba; /* Change background color to pink when .pink class is present */
 }
 
 .navbar.green{
-    background-color: #DD7878;
+    background-color: #dd7878b4;
 }
 
 .navbar .logo {
     width: 200px;
+}
+
+.navbar.lightgreen{
+    background-color: #72d3b6b3;
 }
 
 .navbar-menu {
@@ -53,13 +57,21 @@
 }
 
 .navbar-search-icon .dot {
+    color: white;
     position: absolute;
-    min-width: 10px;
-    min-height: 10px;
-    background-color: red;
-    border-radius: 5px;
+    border-radius: 50px;
     top: 0px;
     right: -8px;
+    width: 22px;
+    height: 22px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 11px;
+    font-size: 14px;
+    background: red;
+    color: white;
+
 }
 
 .navbar-right img {

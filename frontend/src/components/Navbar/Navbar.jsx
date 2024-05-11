@@ -1,25 +1,26 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import './Navbar.css';
 import { assets } from '../../assets/assets';
 import { Link } from 'react-router-dom';
+import { ShopContext } from '../../Context/ShopContext';
 
 const Navbar = () => {
     // Underline Effect
     const [menu, setMenu] = useState("home");
     const [navbarColor, setNavbarColor] = useState("");
+    const {getTotalCartItems} = useContext(ShopContext);
 
     const handleMenuClick = (menuItem) => {
         setMenu(menuItem);
         if (menuItem === "menu") {
             setNavbarColor("pink"); // Set navbar color to pink when "Menu" is clicked
-        }
-        else if(menuItem === "about"){
+        } else if (menuItem === "about") {
             setNavbarColor("yellow");
-        }
-        else if(menuItem === "login"){
+        } else if (menuItem === "login") {
             setNavbarColor("green");
-        }
-        else {
+        } else if (menuItem === "cart") {
+            setNavbarColor("lightgreen"); // Set navbar color to light green when "Cart" is clicked
+        } else {
             setNavbarColor("");
         }
     };
@@ -36,8 +37,8 @@ const Navbar = () => {
 
             <div className="navbar-right">
                 <div className="navbar-search-icon">
-                    <Link to='/cart'><img src={assets.basket_icon} alt="" /></Link>
-                    <div className="dot"></div>
+                    <Link to='/cart' onClick={() => handleMenuClick("cart")}><img src={assets.basket_icon} alt="" /></Link> {/* Add onClick handler for the cart icon */}
+                    <div className="dot">{getTotalCartItems()}</div>
                 </div>
                 <div onClick={() => handleMenuClick("login")}><Link to='/login'><img src={assets.profile_icon} alt="" /></Link></div>
             </div>

@@ -1,5 +1,5 @@
 import React, { createContext, useState } from "react";
-import {food_list} from '../assets/assets';
+import {food_list} from "../assets/assets";
 
 export const ShopContext = createContext(null);
 
@@ -14,6 +14,7 @@ const getDefaultCart = ()=>{
 
 const ShopContextProvider = (props)=>{
 
+   
     const [cartItems, setCartItems] = useState(getDefaultCart());
     
     
@@ -26,8 +27,31 @@ const ShopContextProvider = (props)=>{
         setCartItems((prev)=>({...prev,[itemId]:prev[itemId]-1}))
     }
 
+    const getTotalCartAmount = ()=>{
+        let totalAmount = 0;
+        for(const item in cartItems){
+            if(cartItems[item]>0){
+                let itemInfo = food_list.find((product)=>product.id===item)
+                totalAmount += itemInfo.price * cartItems[item];
+            }
+        }
+        return totalAmount;
+    }
+
+
+    const getTotalCartItems =() => {
+        let totalItem = 0;
+        for(const item in cartItems){
+            if(cartItems[item] >0){
+                totalItem += cartItems[item];
+            }
+        }
+
+        return totalItem;
+    }
+
     //Data & functions that will be provider in the shopcontext provider as a value, so that it can be used in any component
-    const contextValue = {food_list, cartItems, addToCart, removeFromCart};
+    const contextValue = {getTotalCartItems, getTotalCartAmount, food_list, cartItems, addToCart, removeFromCart};
 
     return (
         <ShopContext.Provider value={contextValue}>
