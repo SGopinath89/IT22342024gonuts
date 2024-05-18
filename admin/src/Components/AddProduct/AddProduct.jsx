@@ -108,7 +108,7 @@ const AddProduct = () => {
           }`}
         >
           {alertType === 'error'
-            ? 'Please fill all the fields'
+            ? 'Please Fill All The Fields'
             : 'Food Item Added Successfully'}
         </div>
       )}
