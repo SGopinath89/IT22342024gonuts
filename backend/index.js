@@ -196,6 +196,30 @@ app.post('/signup', async (req, res)=>{
 })
 
 
+// Creating endpoint for user login
+app.post('/login', async (req, res)=>{
+    let user = await Users.findOne({email:req.body.email});
+    if(user){
+        const password = req.body.password === user.password;  
+        if(password){
+            const data = {
+                user:{
+                    id:user.id
+                }
+            }
+            const token = jwt.sign(data, 'gonutswithdonuts');
+            res.json({success:true, token});
+        } 
+        else{
+            res.json({success:false, errors:"Incorrect Password"});
+        } 
+    }
+    else{
+        res.json({success:false, errors:"Incorrect e-mail id"});
+    }
+})
+
+
 
 // Start server
 app.listen(port, (error) => {
