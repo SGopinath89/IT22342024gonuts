@@ -7,9 +7,10 @@ const mongoose = require("mongoose");
 const multer = require("multer");
 const path = require("path");
 const cors = require("cors");
+const jwt = require("jsonwebtoken");
 
 const app = express();
-const port = process.env.PORT || 4000;
+const port = process.env.PORT;
 
 // Middleware
 app.use(express.json());
@@ -110,6 +111,7 @@ app.post('/addproduct', async (req, res) => {
     }
 });
 
+
 // Creating API for deleting products
 app.post('/removeproduct', async (req, res) => {
     try {
@@ -120,6 +122,7 @@ app.post('/removeproduct', async (req, res) => {
     }
 });
 
+
 // Creating API for getting all products
 app.get('/allproducts', async (req, res) => {
     try {
@@ -129,6 +132,70 @@ app.get('/allproducts', async (req, res) => {
         res.status(500).json({ success: false, message: error.message });
     }
 });
+
+
+// Schema creating for user model
+const Users = mongoose.model('Users', {
+    name:{
+        type:String,
+    },
+    email:{
+        type:String,
+        unique:true,
+    },
+    password:{
+        type:String,
+    },
+    cartData:{
+        type:Object,
+    },
+    date:{
+        type:Date,
+        default:Date.now,
+    }
+})
+
+
+// Creating endpoint for registering the user
+app.post('/signup', async (req, res)=>{
+
+    let check = await Users.findOne({email:req.body.email});
+    if(check){
+        return res.status(400).json({success:false, errors:"Existing user found with same email address"});
+    }
+
+
+    //If no user with same email, new user can register, so that create an empty cart 
+    let cart = {};
+
+    for(let i = 0; i<300; i++){
+        cart[i] = 0;
+    }
+
+    const user = new Users({
+        name:req.body.username,
+        email:req.body.email,
+        password:req.body.password,
+        cartData:cart,
+    })
+
+    //save user in the database
+    await user.save();
+
+    //JWT authentication
+    const data = {
+        user:{
+            id:user.id
+        }
+    }
+
+    //create token 
+    const token = jwt.sign(data, 'gonutswithdonuts');
+    res.json({success:true, token});
+
+})
+
+
 
 // Start server
 app.listen(port, (error) => {
