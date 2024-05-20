@@ -63,8 +63,14 @@ import profile_icon from './profile_icon.png'
 import bag_icon from './bag_icon.png'
 import logout_icon from './logout_icon.png'
 import parcel_icon from './parcel_icon.png'
+import show from './show.png'
+import hide from './hide.png'
+import logout from './logout.png'
 
 export const assets = {
+    logout,
+    hide,
+    show,
     iclairs,
     cupcake,
     donut,
