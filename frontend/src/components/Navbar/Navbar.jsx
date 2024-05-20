@@ -8,7 +8,7 @@ const Navbar = () => {
     // Underline Effect
     const [menu, setMenu] = useState("home");
     const [navbarColor, setNavbarColor] = useState("");
-    const {getTotalCartItems} = useContext(ShopContext);
+    const { getTotalCartItems } = useContext(ShopContext);
 
     const handleMenuClick = (menuItem) => {
         setMenu(menuItem);
@@ -40,10 +40,23 @@ const Navbar = () => {
                     <Link to='/cart' onClick={() => handleMenuClick("cart")}><img src={assets.basket_icon} alt="" /></Link> {/* Add onClick handler for the cart icon */}
                     <div className="dot">{getTotalCartItems()}</div>
                 </div>
-                <div onClick={() => handleMenuClick("login")}><Link to='/login'><img src={assets.profile_icon} alt="" /></Link></div>
+                <div onClick={() => handleMenuClick("login")}>
+                    {localStorage.getItem('auth-token') ? (
+                        <img className='logout-button'
+                            onClick={() => {
+                                localStorage.removeItem('auth-token');
+                                window.location.replace('/');
+                            }} 
+                            src={assets.logout} 
+                            alt="Logout"
+                        />
+                    ) : (
+                        <Link to='/login'><img src={assets.profile_icon} alt="Profile" /></Link>
+                    )}
+                </div>
             </div>
         </div>
-    )
+    );
 }
 
 export default Navbar;

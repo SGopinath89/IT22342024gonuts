@@ -1,31 +1,51 @@
-import React, { createContext, useState } from "react";
-import {food_list} from "../assets/assets";
+import React, {createContext, useEffect, useState} from "react";
+//import { food_list } from "../assets/assets";
+
 
 export const ShopContext = createContext(null);
 
-const getDefaultCart = ()=>{
+const getDefaultCart = () =>{
     let cart = {};
-    for(let index=0; index < food_list.length+1; index++){
+    for(let index=0; index< 300+1; index++){
         cart[index] = 0;
     }
 
     return cart;
 }
 
-const ShopContextProvider = (props)=>{
+const ShopContextProvider = (props) =>{
 
-   
+    const [food_list, setAll_Product] = useState([]);
     const [cartItems, setCartItems] = useState(getDefaultCart());
-    
-    
-    const addToCart = (itemId)=>{
+
+    useEffect(()=>{
+        fetch('http://localhost:4000/allproducts')
+        .then((response)=>response.json())
+        .then((data)=>setAll_Product(data));
+    },[])
+   
+
+    const addToCart = (itemId) =>{
         setCartItems((prev)=>({...prev,[itemId]:prev[itemId]+1}))
-        console.log(cartItems);
+        if(localStorage.getItem('auth-token')){
+            fetch('http://localhost:4000/addtocart', {
+                method:'POST',
+                headers:{
+                    Accept:'application/form-data',
+                    'auth-token':`${localStorage.getItem('auth-token')}`,
+                    'Content-Type':'application/json',
+                },
+                body:JSON.stringify({'itemId':itemId}),
+            })
+            .then((response)=>response.json())
+            .then((data)=>console.log(data));
+        }
     }
 
-    const removeFromCart = (itemId)=>{
+    const removeFromCart = (itemId) =>{
         setCartItems((prev)=>({...prev,[itemId]:prev[itemId]-1}))
     }
+
 
     const getTotalCartAmount = ()=>{
         let totalAmount = 0;
@@ -50,14 +70,14 @@ const ShopContextProvider = (props)=>{
         return totalItem;
     }
 
-    //Data & functions that will be provider in the shopcontext provider as a value, so that it can be used in any component
-    const contextValue = {getTotalCartItems, getTotalCartAmount, food_list, cartItems, addToCart, removeFromCart};
+    const contextValue = {getTotalCartAmount, food_list, cartItems, addToCart, removeFromCart, getTotalCartItems};
 
-    return (
+    return(
         <ShopContext.Provider value={contextValue}>
             {props.children}
         </ShopContext.Provider>
     )
+
 }
 
 export default ShopContextProvider;
