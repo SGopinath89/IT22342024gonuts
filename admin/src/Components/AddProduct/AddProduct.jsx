@@ -14,7 +14,7 @@ const AddProduct = () => {
   const [productDetails, setProductDetails] = useState({
     name: '',
     image: '',
-    category: 'Donuts',
+    category: 'donuts',
     price: '',
     description: ''
   });
@@ -83,7 +83,7 @@ const AddProduct = () => {
                         setProductDetails({
                             name: '',
                             image: '',
-                            category: 'Donuts',
+                            category: 'donuts',
                             price: '',
                             description: ''
                         });
@@ -155,8 +155,8 @@ const AddProduct = () => {
           name='category'
           className='add-product-selector'
         >
-          <option value='donuts'>Donut</option>
-          <option value='cupcakes'>Cup Cake</option>
+          <option value='donuts'>Donuts</option>
+          <option value='cupcakes'>Cup Cakes</option>
           <option value='iclairs'>Iclairs</option>
         </select>
       </div>

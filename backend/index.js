@@ -219,7 +219,28 @@ app.post('/login', async (req, res)=>{
     }
 })
 
+// Creating end point for latest items
+app.get('/latest', async (req, res)=>{
+    let products = await Product.find({});
+    let latest = products.slice(1).slice(-8);
+    console.log("Latest Carvings Fetched");
+    res.send(latest);
+})
 
+
+// creating end point for popular
+app.get('/popular', async(req, res)=>{
+    let product1 = await Product.find({category:"donuts"});
+    let popular_of_week = product1.slice(0,4);
+    console.log("Popular of week fetched");
+    res.send(popular_of_week);
+})
+
+
+//creating end point for adding food in cart data
+app.post('addtocart', async(req, res)=>{
+    console.log(req.body);
+})
 
 // Start server
 app.listen(port, (error) => {

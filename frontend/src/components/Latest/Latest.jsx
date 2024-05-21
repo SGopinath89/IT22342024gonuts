@@ -1,9 +1,19 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import './Latest.css'
-import { latest } from '../../assets/assets';
+//import { latest } from '../../assets/assets';
 import Item from '../Item/Item';
 
 const Latest = () => {
+
+  const [latest, setLatest] = useState([]);
+
+  useEffect(()=>{
+    fetch('http://localhost:4000/latest')
+    .then((response)=>response.json())
+    .then((data)=>setLatest(data));
+
+  },[])
+
   return (
     <div className='latest'>
       <h1>LATEST CARVINGS</h1>
