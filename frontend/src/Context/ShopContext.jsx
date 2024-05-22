@@ -39,20 +39,26 @@ const ShopContextProvider = (props) =>{
    
 
     const addToCart = (itemId) =>{
-        setCartItems((prev)=>({...prev,[itemId]:prev[itemId]+1}))
-        if(localStorage.getItem('auth-token')){
-            fetch('http://localhost:4000/addtocart', {
-                method:'POST',
-                headers:{
-                    Accept:'application/form-data',
-                    'auth-token':`${localStorage.getItem('auth-token')}`,
-                    'Content-Type':'application/json',
-                },
-                body:JSON.stringify({'itemId':itemId}),
-            })
-            .then((response)=>response.json())
-            .then((data)=>console.log(data));
+        if(!cartItems[itemId]){
+            setCartItems((prev)=>({...prev, [itemId]:1}))
         }
+        else{
+            setCartItems((prev)=>({...prev,[itemId]:prev[itemId]+1}))
+            if(localStorage.getItem('auth-token')){
+                fetch('http://localhost:4000/addtocart', {
+                    method:'POST',
+                    headers:{
+                        Accept:'application/form-data',
+                        'auth-token':`${localStorage.getItem('auth-token')}`,
+                        'Content-Type':'application/json',
+                    },
+                    body:JSON.stringify({'itemId':itemId}),
+                })
+                .then((response)=>response.json())
+                .then((data)=>console.log(data));
+            }
+        }
+        
     }
 
     const removeFromCart = (itemId) =>{
@@ -72,6 +78,10 @@ const ShopContextProvider = (props) =>{
         }
     }
 
+
+    useEffect(()=>{
+        console.log(cartItems);
+    },[cartItems])
 
     const getTotalCartAmount = ()=>{
         let totalAmount = 0;
@@ -96,7 +106,7 @@ const ShopContextProvider = (props) =>{
         return totalItem;
     }
 
-    const contextValue = {getTotalCartAmount, food_list, cartItems, addToCart, removeFromCart, getTotalCartItems};
+    const contextValue = {cartItems, setCartItems, getTotalCartAmount, food_list, cartItems, addToCart, removeFromCart, getTotalCartItems};
 
     return(
         <ShopContext.Provider value={contextValue}>

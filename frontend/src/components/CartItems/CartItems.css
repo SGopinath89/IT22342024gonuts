@@ -31,7 +31,7 @@
 }
 
 .cartitems-format {
-    grid-template-columns: 0.5fr 2.5fr 1fr 1fr 1fr 1fr;
+    grid-template-columns: 1fr 2.5fr 1fr 1fr 1fr 1fr;
     font-size: 17px;
     font-weight: 500;
 }
@@ -41,7 +41,7 @@
 }
 
 .carticon-remove-icon {
-    width: 15px;
+    width: 25px;
     margin-left: 40px;
     cursor: pointer;
 }

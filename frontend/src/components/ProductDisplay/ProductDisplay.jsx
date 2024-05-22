@@ -1,11 +1,13 @@
 import React, { useContext } from "react";
 import './ProductDisplay.css';
 import { ShopContext } from "../../Context/ShopContext";
+import { assets } from "../../assets/assets";
 
 
 const ProductDisplay = (props) => {
+
     const {product} = props;
-    const {addToCart} = useContext(ShopContext);
+    const {cartItems, addToCart, removeFromCart} = useContext(ShopContext);
 
     return(
         <div className="productdisplay">
@@ -21,8 +23,15 @@ const ProductDisplay = (props) => {
                </div>
                <p className="productdisplay-right-category"><span>Category :</span>{product.category}</p>
 
-               <button onClick={()=>{addToCart(product.id)}}>ADD TO CART</button>
-               
+               {!cartItems[product.id]
+                    ?<button onClick={()=>addToCart(product.id)}>ADD TO CART</button>:
+                    <div className="food-item-counter">
+                        <img onClick={()=>removeFromCart(product.id)} src={assets.remove_icon_red} alt="" />
+                        <p>{cartItems[product.id]}</p>
+                        <img onClick={()=>addToCart(product.id)} src={assets.add_icon_green} alt="" />
+                    </div>
+               }
+
            </div>
 
             </div>
