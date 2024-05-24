@@ -48,3 +48,8 @@
     width: 200px;
     border-radius: 50px;
 }
+
+.viewbutton:hover{
+    cursor: pointer;
+    background-color: #ea6767;
+}

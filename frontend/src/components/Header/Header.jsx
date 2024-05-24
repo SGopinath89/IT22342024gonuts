@@ -14,7 +14,7 @@ const Header = () => {
         <div className="header-right">
             <h1>Hello Sweet Lovers</h1>
             <p>Indulge in the exquisite delights of your favorite confections and let them serenade your senses with their sweet symphony</p>
-            <Link to='/allcategory'><button>View Menu</button></Link> 
+            <Link to='/allcategory'><button className='viewbutton'>View Menu</button></Link> 
         </div>
         
         
