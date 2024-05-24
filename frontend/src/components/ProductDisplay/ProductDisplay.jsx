@@ -24,7 +24,7 @@ const ProductDisplay = (props) => {
                <p className="productdisplay-right-category"><span>Category :</span>{product.category}</p>
 
                {!cartItems[product.id]
-                    ?<button onClick={()=>addToCart(product.id)}>ADD TO CART</button>:
+                    ?<button className="addtocart" onClick={()=>addToCart(product.id)}>ADD TO CART</button>:
                     <div className="food-item-counter">
                         <img onClick={()=>removeFromCart(product.id)} src={assets.remove_icon_red} alt="" />
                         <p>{cartItems[product.id]}</p>
