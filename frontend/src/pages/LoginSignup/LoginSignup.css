@@ -28,7 +28,7 @@
     width: 90%;
 }
 
-input {
+.loginSignup-container input {
     background-color: #a25c5c6f;
     color: white;
     border: none;
@@ -39,11 +39,11 @@ input {
     border-radius: 20px;
 }
 
-input:hover {
+.loginSignup-container input:hover {
     box-shadow: 1px 3px 4px 1px #8b4a4ab5;
 }
 
-button {
+.lsbutton {
     margin-top: 20px;
     padding: 10px;
     width: 90%;
@@ -53,7 +53,7 @@ button {
     color: rgb(237, 227, 227);
 }
 
-button:hover {
+.lsbutton:hover {
     box-shadow: 1px 3px 4px 1px #9c3a3a8c;
     background-color: #de5353d0;
     cursor: pointer;

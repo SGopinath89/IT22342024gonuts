@@ -89,7 +89,7 @@ const LoginSignup = () => {
             </span>
           </div>
         </div>
-        <button onClick={() => { state === "Login" ? login() : signup() }}>{state.toUpperCase()}</button>
+        <button className='lsbutton' onClick={() => { state === "Login" ? login() : signup() }}>{state.toUpperCase()}</button>
         <p className='loginSignup-login'>
           {state === "Sign Up" ? "Already have an account? " : "Don't have an account? "}
           <span onClick={toggleState}>
