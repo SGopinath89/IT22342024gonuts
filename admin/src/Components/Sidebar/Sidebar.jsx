@@ -3,7 +3,7 @@ import './Sidebar.css';
 import { Link } from 'react-router-dom';
 import add_product_icon from '../../assets/add.png';
 import list_product_icon from '../../assets/list.png';
-import orders_icon from '../../assets/parcel_icon.png'; // Assuming you have an orders icon
+import orders_icon from '../../assets/box.png'; // Assuming you have an orders icon
 
 const Sidebar = () => {
     const [activeItem, setActiveItem] = useState(null);
@@ -30,8 +30,8 @@ const Sidebar = () => {
 
             <Link to={'/vieworders'} style={{textDecoration: 'none'}}>
                 <div className={`sidebar-item ${activeItem === 2 ? 'clicked' : ''}`} onClick={() => handleItemClick(2)}>
-                    <img src={orders_icon} alt="View Orders" />  
-                    <p>Orders</p>  
+                    <img className="order-i"src={orders_icon} alt="View Orders" />  
+                    <p className="order-p">Orders</p>  
                 </div>            
             </Link>
         </div>

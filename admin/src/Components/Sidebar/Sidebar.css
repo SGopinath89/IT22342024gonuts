@@ -35,3 +35,11 @@ img{
     box-shadow:0px 2px 6px 2px  #6823236d;
     background: #bc4d4dc4;
 }
+
+.order-p{
+    padding:0px 10px
+}
+
+.order-i{
+    width: 37px;
+}
