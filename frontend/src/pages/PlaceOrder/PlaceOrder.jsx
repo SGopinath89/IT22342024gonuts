@@ -15,7 +15,7 @@ const PlaceOrder = () => {
     zipCode: '',
     country: '',
     phone: '',
-    deliveryMethod: 'online',
+    deliveryMethod: 'Paid Online',
   });
   const [errors, setErrors] = useState({});
   const navigate = useNavigate();
@@ -55,7 +55,7 @@ const PlaceOrder = () => {
 
       const token = localStorage.getItem('auth-token');
 
-      if (data.deliveryMethod === 'online') {
+      if (data.deliveryMethod === 'Paid Online') {
         navigate('/paymentportal', { state: { orderData } });
       } else {
         orderData.payment = false;
@@ -175,8 +175,8 @@ const PlaceOrder = () => {
             value={data.deliveryMethod}
             onChange={onChangeHandler}
           >
-            <option value="online">Online Payment</option>
-            <option value="cash">Cash On Delivery</option>
+            <option value="Paid Online">Online Payment</option>
+            <option value="Cash On Delivery">Cash On Delivery</option>
           </select>
         </div>
       </div>
@@ -201,7 +201,7 @@ const PlaceOrder = () => {
             </div>
           </div>
           <button type="submit">
-            {data.deliveryMethod === 'cash' 
+            {data.deliveryMethod === 'Cash On Delivery' 
               ? `PAY   Rs.${getTotalCartAmount() === 0 ? 0 : getTotalCartAmount() + 99}.00` 
               : 'PROCEED TO PAY'}
           </button>
