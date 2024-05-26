@@ -4,7 +4,7 @@ import { ShopContext } from '../../Context/ShopContext';
 import { useNavigate } from 'react-router-dom';
 
 const PlaceOrder = () => {
-  const { getTotalCartAmount, food_list, cartItems } = useContext(ShopContext);
+  const { getTotalCartAmount, food_list, cartItems, clearCart } = useContext(ShopContext);
   const [data, setData] = useState({
     firstName: '',
     lastName: '',
@@ -59,7 +59,7 @@ const PlaceOrder = () => {
         navigate('/paymentportal', { state: { orderData } });
       } else {
         orderData.payment = false;
-        
+
         await fetch('http://localhost:4000/placeorder', {
           method: 'POST',
           headers: {
@@ -73,6 +73,7 @@ const PlaceOrder = () => {
         .then((data) => {
           if (data.success) {
             alert("Order Placed Successfully");
+            clearCart();
             navigate('/');
           } else {
             alert("Error Placing Order");

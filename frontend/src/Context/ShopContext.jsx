@@ -13,10 +13,16 @@ const getDefaultCart = () =>{
     return cart;
 }
 
+
+
 const ShopContextProvider = (props) =>{
 
     const [food_list, setAll_Product] = useState([]);
     const [cartItems, setCartItems] = useState(getDefaultCart());
+
+    const clearCart = () => {
+        setCartItems({});
+      };
 
     useEffect(()=>{
         fetch('http://localhost:4000/allproducts')
@@ -106,7 +112,7 @@ const ShopContextProvider = (props) =>{
         return totalItem;
     }
 
-    const contextValue = {setCartItems, getTotalCartAmount, food_list, cartItems, addToCart, removeFromCart, getTotalCartItems};
+    const contextValue = {clearCart, setCartItems, getTotalCartAmount, food_list, cartItems, addToCart, removeFromCart, getTotalCartItems};
 
     return(
         <ShopContext.Provider value={contextValue}>

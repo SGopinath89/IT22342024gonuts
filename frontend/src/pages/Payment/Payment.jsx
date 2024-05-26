@@ -1,7 +1,9 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
+import { ShopContext } from '../../Context/ShopContext';
 
 const Payment = () => {
+  const { clearCart } = useContext(ShopContext);
   const [cardNumber, setCardNumber] = useState('');
   const [pin, setPin] = useState('');
   const [expire, setExpire] = useState('');
@@ -36,6 +38,7 @@ const Payment = () => {
       .then((data) => {
         if (data.success) {
           alert("Order Placed Successfully");
+          clearCart();
           navigate('/');
         } else {
           alert("Error Placing Order");
