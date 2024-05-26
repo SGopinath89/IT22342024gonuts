@@ -50,3 +50,26 @@
     margin-top: 30px;
     width: 100%;
 }
+
+
+.paymentmethod{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}
+
+.paymentmethod p{
+    font-size: 13px;
+}
+
+.paymentmethod select{
+    color: black;
+    background-color: white;
+    margin-bottom: 15px;
+    width: 80%;
+    padding: 10px;
+    border: 1px solid #c5c5c5;
+    border-radius: 4px;
+    outline-color: rgba(40, 128, 60, 0.854);
+}

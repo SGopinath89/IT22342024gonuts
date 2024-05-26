@@ -1,10 +1,11 @@
 import React, { useContext, useState } from 'react';
 import './PlaceOrder.css';
 import { ShopContext } from '../../Context/ShopContext';
+import { useNavigate } from 'react-router-dom';
 
 const PlaceOrder = () => {
-  const { getTotalCartAmount } = useContext(ShopContext);
-  const [formValues, setFormValues] = useState({
+  const { getTotalCartAmount, food_list, cartItems } = useContext(ShopContext);
+  const [data, setData] = useState({
     firstName: '',
     lastName: '',
     email: '',
@@ -14,18 +15,20 @@ const PlaceOrder = () => {
     zipCode: '',
     country: '',
     phone: '',
+    deliveryMethod: 'online',
   });
   const [errors, setErrors] = useState({});
+  const navigate = useNavigate();
 
-  const handleInputChange = (e) => {
+  const onChangeHandler = (e) => {
     const { name, value } = e.target;
-    setFormValues({ ...formValues, [name]: value });
+    setData({ ...data, [name]: value });
   };
 
   const validateForm = () => {
     const newErrors = {};
-    Object.keys(formValues).forEach(key => {
-      if (!formValues[key]) {
+    Object.keys(data).forEach(key => {
+      if (!data[key]) {
         newErrors[key] = 'This field is required';
       }
     });
@@ -33,15 +36,54 @@ const PlaceOrder = () => {
     return Object.keys(newErrors).length === 0;
   };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
+  const placeOrder = async (event) => {
+    event.preventDefault();
     if (validateForm()) {
-      // Proceed with form submission
+      let orderItems = [];
+      food_list.forEach((item) => {
+        if (cartItems[item.id] > 0) { 
+          let itemInfo = { ...item, quantity: cartItems[item.id] }; // Spread item to avoid mutating original
+          orderItems.push(itemInfo);
+        }
+      });
+
+      let orderData = {
+        address: data,
+        items: orderItems,
+        amount: getTotalCartAmount() + 99,
+      };
+
+      const token = localStorage.getItem('auth-token');
+
+      if (data.deliveryMethod === 'online') {
+        navigate('/paymentportal', { state: { orderData } });
+      } else {
+        orderData.payment = false;
+        
+        await fetch('http://localhost:4000/placeorder', {
+          method: 'POST',
+          headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+            'auth-token': token,
+          },
+          body: JSON.stringify(orderData),
+        })
+        .then((response) => response.json())
+        .then((data) => {
+          if (data.success) {
+            alert("Order Placed Successfully");
+            navigate('/');
+          } else {
+            alert("Error Placing Order");
+          }
+        });
+      }
     }
   };
 
   return (
-    <form className='place-order' onSubmit={handleSubmit}>
+    <form className='place-order' onSubmit={placeOrder}>
       <div className="place-order-left">
         <p className='title'>Delivery Information</p>
 
@@ -50,16 +92,16 @@ const PlaceOrder = () => {
             type="text"
             name="firstName"
             placeholder='First Name'
-            value={formValues.firstName}
-            onChange={handleInputChange}
+            value={data.firstName}
+            onChange={onChangeHandler}
             className={errors.firstName ? 'error' : ''}
           />
           <input
             type="text"
             name="lastName"
             placeholder='Last Name'
-            value={formValues.lastName}
-            onChange={handleInputChange}
+            value={data.lastName}
+            onChange={onChangeHandler}
             className={errors.lastName ? 'error' : ''}
           />
         </div>
@@ -67,16 +109,16 @@ const PlaceOrder = () => {
           type="email"
           name="email"
           placeholder='Email Address'
-          value={formValues.email}
-          onChange={handleInputChange}
+          value={data.email}
+          onChange={onChangeHandler}
           className={errors.email ? 'error' : ''}
         />
         <input
           type="text"
           name="street"
           placeholder='Street'
-          value={formValues.street}
-          onChange={handleInputChange}
+          value={data.street}
+          onChange={onChangeHandler}
           className={errors.street ? 'error' : ''}
         />
 
@@ -85,16 +127,16 @@ const PlaceOrder = () => {
             type="text"
             name="city"
             placeholder='City'
-            value={formValues.city}
-            onChange={handleInputChange}
+            value={data.city}
+            onChange={onChangeHandler}
             className={errors.city ? 'error' : ''}
           />
           <input
             type="text"
             name="state"
             placeholder='State'
-            value={formValues.state}
-            onChange={handleInputChange}
+            value={data.state}
+            onChange={onChangeHandler}
             className={errors.state ? 'error' : ''}
           />
         </div>
@@ -103,16 +145,16 @@ const PlaceOrder = () => {
             type="text"
             name="zipCode"
             placeholder='Zip Code'
-            value={formValues.zipCode}
-            onChange={handleInputChange}
+            value={data.zipCode}
+            onChange={onChangeHandler}
             className={errors.zipCode ? 'error' : ''}
           />
           <input
             type="text"
             name="country"
             placeholder='Country'
-            value={formValues.country}
-            onChange={handleInputChange}
+            value={data.country}
+            onChange={onChangeHandler}
             className={errors.country ? 'error' : ''}
           />
         </div>
@@ -120,10 +162,22 @@ const PlaceOrder = () => {
           type="text"
           name="phone"
           placeholder='Phone'
-          value={formValues.phone}
-          onChange={handleInputChange}
+          value={data.phone}
+          onChange={onChangeHandler}
           className={errors.phone ? 'error' : ''}
         />
+
+        <div className='paymentmethod'>
+          <p>Payment Option: </p>
+          <select
+            name="deliveryMethod"
+            value={data.deliveryMethod}
+            onChange={onChangeHandler}
+          >
+            <option value="online">Online Payment</option>
+            <option value="cash">Cash On Delivery</option>
+          </select>
+        </div>
       </div>
 
       <div className="place-order-right">
@@ -137,19 +191,23 @@ const PlaceOrder = () => {
             <hr />
             <div className="cartitems-total-item">
               <p>Shipping Fee</p>
-              <p>Rs.{getTotalCartAmount()===0?0:99}.00</p>
+              <p>Rs.{getTotalCartAmount() === 0 ? 0 : 99}.00</p>
             </div>
             <hr />
             <div className="cartitems-total-item">
               <h3>Total</h3>
-              <h3>Rs.{getTotalCartAmount()===0?0:getTotalCartAmount()+99}.00</h3>
+              <h3>Rs.{getTotalCartAmount() === 0 ? 0 : getTotalCartAmount() + 99}.00</h3>
             </div>
           </div>
-          <button type="submit">PROCEED TO PAYMENT</button>
+          <button type="submit">
+            {data.deliveryMethod === 'cash' 
+              ? `PAY   Rs.${getTotalCartAmount() === 0 ? 0 : getTotalCartAmount() + 99}.00` 
+              : 'PROCEED TO PAY'}
+          </button>
         </div>
       </div>
     </form>
   );
-}
+};
 
 export default PlaceOrder;
