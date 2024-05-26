@@ -10,6 +10,7 @@ import About from './components/About/About'
 import Category from './pages/Category/Category'
 import LoginSignup from './pages/LoginSignup/LoginSignup'
 import Product from './pages/Product/Product'
+import Payment from './pages/Payment/Payment'
 
 const App = () => {
   return (
@@ -25,6 +26,7 @@ const App = () => {
         <Route path='/login' element={<LoginSignup/>} />
         <Route path='/cart' element={<Cart/>} />
         <Route path='/order' element={<PlaceOrder/>} />
+        <Route path='/paymentportal' element={<Payment/>}/>
         <Route path="/product" element={<Product/>}>
           <Route path=':productId' element={<Product/>}/>
         </Route>
