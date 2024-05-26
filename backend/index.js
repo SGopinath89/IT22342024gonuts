@@ -359,6 +359,19 @@ app.post('/placeorder', fetchUser, async (req, res) => {
 });
 
 
+//list orders endpoint creation
+app.get('/listorders', async(req, res)=>{
+    try{
+        const orders = await Order.find({});
+        res.json({success:true, data:orders})
+    }
+    catch(error){
+        console.log(error);
+        res.json({success:false, message:"Error"})
+    }
+})
+
+
 
 // Start server
 app.listen(port, (error) => {
