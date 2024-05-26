@@ -8,9 +8,14 @@ const multer = require("multer");
 const path = require("path");
 const cors = require("cors");
 const jwt = require("jsonwebtoken");
+const fs = require("fs");
+
+
 
 const app = express();
 const port = process.env.PORT;
+
+
 
 // Middleware
 app.use(express.json());
@@ -115,8 +120,23 @@ app.post('/addproduct', async (req, res) => {
 // Creating API for deleting products
 app.post('/removeproduct', async (req, res) => {
     try {
-        await Product.findOneAndDelete({ id: req.body.id });
-        res.json({ success: true });
+        // Find the product to get the image URL
+        const product = await Product.findOne({ id: req.body.id });
+
+        // Construct the image path
+        const imagePath = path.join(__dirname, 'upload', 'images', path.basename(product.image));
+
+        // Delete the image file
+        fs.unlink(imagePath, async (err) => {
+            if (err) {
+                console.error('Error deleting image:', err);
+                return res.status(500).json({ success: false, message: 'Error deleting image' });
+            }
+
+            // Delete the product from the database
+            await Product.findOneAndDelete({ id: req.body.id });
+            res.json({ success: true });
+        });
     } catch (error) {
         res.status(500).json({ success: false, message: error.message });
     }
@@ -282,6 +302,62 @@ app.post('/getcart', fetchUser, async(req, res)=>{
     let userData = await Users.findOne({_id:req.user.id});
     res.json(userData.cartData);
 })
+
+
+// Schema creating for order model
+const Order = mongoose.model('Order', {
+    userId:{
+        type:String,
+        required:true
+    },
+    items:{
+        type:Array,
+        required:true,
+    },
+    amount:{
+        type:Number,
+        required:true
+    },
+    address:{
+        type:Object,
+        required:true
+    },
+
+    date:{
+        type:Date,
+        default:Date.now,
+    },
+    payment:{
+        type:Boolean,
+        default:true
+    }
+})
+
+// Add fetchUser middleware to require authentication for placing orders
+app.post('/placeorder', fetchUser, async (req, res) => {
+    try {
+        // Use the authenticated user's ID from the token
+        const userId = req.user.id;
+
+        const newOrder = new Order({
+            userId: userId,
+            items: req.body.items,
+            amount: req.body.amount,
+            address: req.body.address,
+            payment: req.body.payment, // Save payment status
+        });
+
+        await newOrder.save();
+
+        // To clear cart data for the authenticated user
+        await Users.findOneAndUpdate({_id: userId}, {cartData: {}});
+        res.json({success: true, message: "Order placed successfully"});
+    } catch (error) {
+        console.log(error);
+        res.json({success: false, message: "Error placing order"});
+    }
+});
+
 
 
 // Start server
