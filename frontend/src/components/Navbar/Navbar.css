@@ -1,7 +1,7 @@
 .navbar {
     padding: 10px;
     padding-left: 20px;
-    padding-right: 20px; 
+    padding-right: 20px;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -9,24 +9,43 @@
 }
 
 .navbar.pink {
-    background-color: #f288b4af; /* Change background color to pink when .pink class is present */
+    background-color: #f288b4af;
 }
-
 
 .navbar.yellow {
-    background-color: #ddc678ba; /* Change background color to pink when .pink class is present */
+    background-color: #ddc678ba;
 }
 
-.navbar.green{
+.navbar.green {
     background-color: #dd7878b4;
+}
+
+.navbar.lightgreen {
+    background-color: #72d3b6b3;
+}
+
+.navbar.g{
+    background-color: #abdac4;
+}
+
+.navbar.p{
+    background-color: #cca5ec;
+}
+
+.navbar.g1{
+    background-color: #c6e9a3;
+}
+
+.navbar.r{
+    background-color: rgba(101, 233, 105, 0.596);
+}
+
+.navbar.b{
+    background-color: rgba(101, 158, 233, 0.596);
 }
 
 .navbar .logo {
     width: 200px;
-}
-
-.navbar.lightgreen{
-    background-color: #72d3b6b3;
 }
 
 .navbar-menu {
@@ -71,7 +90,6 @@
     font-size: 14px;
     background: red;
     color: white;
-
 }
 
 .navbar-right img {
@@ -79,7 +97,35 @@
     height: 40px;
 }
 
+.profile-section {
+    position: relative;
+}
 
-.logout-button{
+.profile-icon {
+    width: 40px;
+    height: 40px;
     cursor: pointer;
+}
+
+.dropdown-menu {
+    position: absolute;
+    top: 50px;
+    right: 0;
+    background-color: white;
+    border: 1px solid #ccc;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+    display: flex;
+    flex-direction: column;
+    width: 150px;
+}
+
+.dropdown-item {
+    padding: 10px 15px;
+    cursor: pointer;
+    text-align: center;
+}
+
+.dropdown-item:hover {
+    background-color: #f0f0f0;
 }
