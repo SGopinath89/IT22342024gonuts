@@ -11,6 +11,7 @@ import Category from './pages/Category/Category'
 import LoginSignup from './pages/LoginSignup/LoginSignup'
 import Product from './pages/Product/Product'
 import Payment from './pages/Payment/Payment'
+import MyOrders from './pages/MyOrders/MyOrders'
 
 const App = () => {
   return (
@@ -26,6 +27,7 @@ const App = () => {
         <Route path='/login' element={<LoginSignup/>} />
         <Route path='/cart' element={<Cart/>} />
         <Route path='/order' element={<PlaceOrder/>} />
+        <Route path='/track-order' element={<MyOrders/>} />
         <Route path='/paymentportal' element={<Payment/>}/>
         <Route path="/product" element={<Product/>}>
           <Route path=':productId' element={<Product/>}/>
