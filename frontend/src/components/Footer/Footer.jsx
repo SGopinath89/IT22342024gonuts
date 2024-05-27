@@ -1,12 +1,31 @@
 import React from "react";
 import './Footer.css';
 import { assets } from '../../assets/assets';
+import { useLocation } from "react-router-dom";
 
 
 
 const Footer = () => {
+
+    const location = useLocation();
+
+    const getFooterColor = () => {
+        switch (location.pathname) {
+            case '/allcategory':
+                return 'pink';
+            case '/about':
+                return 'yellow';
+            case '/login':
+                return 'green';
+            case '/cart':
+                return 'lightgreen';
+            default:
+                return '';
+        }
+    };
+
     return(
-        <div className='footer'>
+        <div className={`footer ${getFooterColor()}`}>
             <div className="footer-logo">
                 <img src={assets.logo} alt="" />
             </div>

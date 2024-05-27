@@ -12,6 +12,23 @@
     display: flex;
 }
 
+.footer.pink {
+    background-color: #f288b4af;
+}
+
+.footer.yellow {
+    background-color: #ddc678ba;
+}
+
+.footer.green {
+    background-color: #dd7878b4;
+}
+
+.footer.lightgreen {
+    background-color: #72d3b6b3;
+}
+
+
 .footer-logo{
     display: flex;
     align-items: center;
