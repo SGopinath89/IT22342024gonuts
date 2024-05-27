@@ -327,6 +327,10 @@ const Order = mongoose.model('Order', {
         type:Date,
         default:Date.now,
     },
+    status:{
+        type:String,
+        default:"Food Processing"
+    },
     payment:{
         type:Boolean,
         default:true
