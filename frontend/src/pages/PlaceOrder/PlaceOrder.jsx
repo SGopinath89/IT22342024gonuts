@@ -2,6 +2,9 @@ import React, { useContext, useState } from 'react';
 import './PlaceOrder.css';
 import { ShopContext } from '../../Context/ShopContext';
 import { useNavigate } from 'react-router-dom';
+import Modal from 'react-modal';
+
+Modal.setAppElement('#root'); // Make sure to set the root element for accessibility
 
 const PlaceOrder = () => {
   const { getTotalCartAmount, food_list, cartItems, clearCart } = useContext(ShopContext);
@@ -18,6 +21,8 @@ const PlaceOrder = () => {
     deliveryMethod: 'Paid Online',
   });
   const [errors, setErrors] = useState({});
+  const [isPlaceModalOpen, setIsPlaceModalOpen] = useState(false);
+  const [isSuccessModalOpen, setIsSuccessModalOpen] = useState(false);
   const navigate = useNavigate();
 
   const onChangeHandler = (e) => {
@@ -36,13 +41,12 @@ const PlaceOrder = () => {
     return Object.keys(newErrors).length === 0;
   };
 
-  const placeOrder = async (event) => {
-    event.preventDefault();
+  const placeOrder = async () => {
     if (validateForm()) {
       let orderItems = [];
       food_list.forEach((item) => {
-        if (cartItems[item.id] > 0) { 
-          let itemInfo = { ...item, quantity: cartItems[item.id] }; // Spread item to avoid mutating original
+        if (cartItems[item.id] > 0) {
+          let itemInfo = { ...item, quantity: cartItems[item.id] };
           orderItems.push(itemInfo);
         }
       });
@@ -72,9 +76,9 @@ const PlaceOrder = () => {
         .then((response) => response.json())
         .then((data) => {
           if (data.success) {
-            alert("Order Placed Successfully");
+            setIsPlaceModalOpen(false); // Close the modal
+            setIsSuccessModalOpen(true); // Open the success modal
             clearCart();
-            navigate('/');
           } else {
             alert("Error Placing Order");
           }
@@ -83,8 +87,28 @@ const PlaceOrder = () => {
     }
   };
 
+  const handlePlaceOrder = (event) => {
+    event.preventDefault();
+    if (validateForm()) {
+      if (data.deliveryMethod === 'Cash On Delivery') {
+        setIsPlaceModalOpen(true);
+      } else {
+        placeOrder();
+      }
+    }
+  };
+
+  const closePlaceModal = () => {
+    setIsPlaceModalOpen(false);
+  };
+
+  const closeSuccessModal = () => {
+    setIsSuccessModalOpen(false);
+    navigate('/');
+  };
+
   return (
-    <form className='place-order' onSubmit={placeOrder}>
+    <form className='place-order' onSubmit={handlePlaceOrder}>
       <div className="place-order-left">
         <p className='title'>Delivery Information</p>
 
@@ -161,11 +185,11 @@ const PlaceOrder = () => {
         </div>
         <input
           type="text"
-          name="phone"
-          placeholder='Phone'
-          value={data.phone}
-          onChange={onChangeHandler}
-          className={errors.phone ? 'error' : ''}
+            name="phone"
+            placeholder='Phone'
+            value={data.phone}
+            onChange={onChangeHandler}
+            className={errors.phone ? 'error' : ''}
         />
 
         <div className='paymentmethod'>
@@ -202,11 +226,38 @@ const PlaceOrder = () => {
           </div>
           <button type="submit">
             {data.deliveryMethod === 'Cash On Delivery' 
-              ? 'CONFIRM ORDER' 
+              ? 'PLACE ORDER' 
               : 'PROCEED TO PAY'}
           </button>
         </div>
       </div>
+
+      {data.deliveryMethod === 'Cash On Delivery' && (
+        <Modal
+          isOpen={isPlaceModalOpen}
+          onRequestClose={closePlaceModal}
+          contentLabel="Place Order"
+          className="modal"
+          overlayClassName="modal-overlay"
+        >
+          <h3>Please confirm the order</h3>
+          <div className="confirmbuttons">
+            <button onClick={placeOrder}>Confirm</button>
+            <button onClick={closePlaceModal}>Cancel</button>
+          </div>
+        </Modal>
+      )}
+
+      <Modal
+        isOpen={isSuccessModalOpen}
+        onRequestClose={closeSuccessModal}
+        contentLabel="Order Placed"
+        className="modal"
+        overlayClassName="modal-overlay"
+      >
+        <h3>Order Placed Successfully</h3>
+        <button className='ok' onClick={closeSuccessModal}>OK</button>
+      </Modal>
     </form>
   );
 };
