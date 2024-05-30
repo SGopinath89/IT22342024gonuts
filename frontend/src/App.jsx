@@ -12,6 +12,7 @@ import LoginSignup from './pages/LoginSignup/LoginSignup'
 import Product from './pages/Product/Product'
 import Payment from './pages/Payment/Payment'
 import MyOrders from './pages/MyOrders/MyOrders'
+import Contact from './components/Contact/Contact'
 
 const App = () => {
   return (
@@ -29,6 +30,7 @@ const App = () => {
         <Route path='/order' element={<PlaceOrder/>} />
         <Route path='/track-order' element={<MyOrders/>} />
         <Route path='/paymentportal' element={<Payment/>}/>
+        <Route path='/contact' element={<Contact/>}/>
         <Route path="/product" element={<Product/>}>
           <Route path=':productId' element={<Product/>}/>
         </Route>
