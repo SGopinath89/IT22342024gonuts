@@ -40,7 +40,7 @@ const Item = (props) => {
         overlayClassName="modal-overlay"
       >
         <h2>Please Login</h2>
-        <p>You need to log in to view this product.</p>
+        <p>Login to view this product</p>
         <div className="buttons">
         <button onClick={() => navigate('/login')}>Login</button>
         <button onClick={closeModal}>Close</button>

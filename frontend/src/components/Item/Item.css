@@ -73,11 +73,13 @@ margin-right: -50%;
 transform: translate(-50%, -50%);
 background: white;
 padding: 20px;
-max-width: 500px;
-width: 90%;
+width: 350px;
+height: 200px;
 border-radius: 8px;
 box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
 z-index: 1000;
+align-items: center;
+justify-content: center;
 }
 
 .modal-overlay {
@@ -103,23 +105,31 @@ margin-right: 10px;
 padding: 10px 20px;
 border: none;
 border-radius: 4px;
-background: #007bff;
+background: #32b659;
 color: white;
 cursor: pointer;
+}
+
+.modal button:hover{
+    background: #257d3f;
 }
 
 .modal button:last-of-type {
 background: #6c757d;
 }
 
+.modal button:last-of-type:hover {
+    background: #ad3737;
+    }
+
 
 .buttons{
+
     display: flex;
     flex-direction: row;
-    align-items: center;
-    justify-content: center;
+    padding-top: 30px;
 }
 
 .buttons button{
-    width: 200px;
+    width: 130px;
 }
