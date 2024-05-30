@@ -20,7 +20,7 @@
   
   .card-header, .order-card {
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr 1fr 2.5fr; /* Adjust the column sizes as needed */
+    grid-template-columns: 0.6fr 0.7fr 1.3fr 1fr 2.3fr; /* Adjust the column sizes as needed */
     gap: 10px;
     width: 100%;
     align-items: center;
@@ -68,5 +68,9 @@
   
   .order-item p {
     margin: 0;
+  }
+
+  span{
+    color: rgb(211, 75, 75);
   }
   

@@ -60,7 +60,7 @@ const MyOrders = () => {
             <div key={order._id} className="order-card">
               <p>No:&nbsp; {order.orderId}</p>
               <p>${order.amount}</p>
-              <p>{order.status}</p>
+              <p><span>&#x25cf;&nbsp;</span>{order.status}</p>
               <p>{new Date(order.date).toLocaleDateString()}</p>
               <div>
                 {order.items.map((item, index) => (
