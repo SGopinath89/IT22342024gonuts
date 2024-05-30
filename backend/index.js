@@ -9,6 +9,7 @@ const path = require("path");
 const cors = require("cors");
 const jwt = require("jsonwebtoken");
 const fs = require("fs");
+const { log } = require('console');
 
 const app = express();
 const port = process.env.PORT;
@@ -375,6 +376,20 @@ app.get('/myorders', fetchUser, async (req, res) => {
         res.status(500).json({ success: false, message: "Error retrieving orders" });
     }
 });
+
+
+// order status changing API Endpoint
+app.post('/status', async(req, res)=>{
+    try{
+        await Order.findByIdAndUpdate(req.body.orderId, {status:req.body.status});
+        res.json({success:true, message:"Status Updated"});
+    }
+    catch(error){
+        console.log(error);
+        res.json({success:false, message:"Error"});
+    }
+
+})
 
 
 app.listen(port, (error) => {
