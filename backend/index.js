@@ -363,18 +363,19 @@ app.get('/vieworders', async (req, res) => {
     }
 });
 
-
 //Load orders to frontend
 app.get('/myorders', fetchUser, async (req, res) => {
     try {
         const userId = req.user.id;
-        const orders = await Order.find({ userId: userId });
+        // Find orders for the user and sort by orderId in descending order
+        const orders = await Order.find({ userId: userId }).sort({ orderId: -1 });
         res.json({ success: true, data: orders });
     } catch (error) {
         console.log(error);
         res.status(500).json({ success: false, message: "Error retrieving orders" });
     }
 });
+
 
 app.listen(port, (error) => {
     if (!error) {
