@@ -66,8 +66,7 @@
 .footer-icons-container{
     padding: 10px;
     padding-bottom: 6px;
-    background: #fbfbfb;
-    border: 1px solid #ebebeb;
+   
 }
 
 .footer-copyright{
@@ -90,6 +89,9 @@
     background: #e18c8c;
 }
 
+.footer-icons-container img{
+    width: 40px;
+}
 
 @media(max-width:800px){
     .footer{

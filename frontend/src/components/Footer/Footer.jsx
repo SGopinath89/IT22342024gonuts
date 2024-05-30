@@ -2,6 +2,8 @@ import React from "react";
 import './Footer.css';
 import { assets } from '../../assets/assets';
 import { useLocation } from "react-router-dom";
+import assert from "assert";
+
 
 
 
@@ -31,21 +33,24 @@ const Footer = () => {
             </div>
             <ul className="footer-links">
                 <li>About</li>
-                <li>Products</li>
-                <li>Offices</li>
+                <li>Categories</li>
+                <li>Branches</li>
                 <li>Contact</li>
             </ul>
             <div className="footer-social-icon">
                 <div className="footer-icons-container">
-                    <img src={assets.linkedin_icon} alt="" />
+                    <img src={assets.whatsapp} alt="" />
                 </div>
 
                 <div className="footer-icons-container">
-                    <img src={assets.facebook_icon} alt="" />
+                    <img src={assets.facebook} alt="" />
                 </div>
 
                 <div className="footer-icons-container">
-                    <img src={assets.twitter_icon} alt="" />
+                    <img src={assets.instagram} alt="" />
+                </div>
+                <div className="footer-icons-container">
+                    <img src={assets.youtube} alt="" />
                 </div>
             </div>
 
