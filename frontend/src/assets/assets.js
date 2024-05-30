@@ -18,10 +18,19 @@ import offer from './sale.png'
 import search_icon from './search_icon.png'
 import selector_icon from './selector_icon.png'
 import show from './show.png'
+import whatsapp from './whatsapp.png'
+import facebook from './facebook.png'
+import instagram from './instagram.png'
+import youtube from './youtube.png'
+
 
 
 
 export const assets = {
+    whatsapp,
+    facebook, 
+    youtube,
+    instagram,
     logout,
     hide,
     show,
