@@ -202,7 +202,7 @@ const PlaceOrder = () => {
           </div>
           <button type="submit">
             {data.deliveryMethod === 'Cash On Delivery' 
-              ? `PAY   Rs.${getTotalCartAmount() === 0 ? 0 : getTotalCartAmount() + 99}.00` 
+              ? 'CONFIRM ORDER' 
               : 'PROCEED TO PAY'}
           </button>
         </div>
