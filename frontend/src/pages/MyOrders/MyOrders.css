@@ -4,6 +4,7 @@
     padding: 20px;
     align-items: center;
     color: #2d2b2b;
+    background-color: #e5fae0;
   }
   
   .my-orders h1 {
@@ -27,7 +28,7 @@
   }
   
   .card-header {
-    background: #ddd;
+    background: #64b07c;
     padding: 10px;
     border-radius: 8px;
     margin-bottom: 20px;
@@ -39,7 +40,7 @@
   }
   
   .order-card {
-    background: #ffffff;
+    background: #75b3894e;
     border-radius: 8px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
     padding: 10px;
