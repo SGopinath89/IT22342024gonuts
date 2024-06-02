@@ -392,6 +392,64 @@ app.post('/status', async(req, res)=>{
 })
 
 
+
+
+
+const messageSchema = new mongoose.Schema({
+    userId: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'Users',
+      required: true,
+    },
+    name: {
+      type: String,
+      required: true,
+    },
+    email: {
+      type: String,
+      required: true,
+    },
+    subject: {
+      type: String,
+      required: true,
+    },
+    message: {
+      type: String,
+      required: true,
+    },
+    date: {
+      type: Date,
+      default: Date.now,
+    },
+  });
+  
+  const Message = mongoose.model('Message', messageSchema);
+
+
+// Contact form endpoint
+app.post('/contact', fetchUser, async (req, res) => {
+  try {
+    const { name, email, subject, message } = req.body;
+    const userId = req.user.id;
+
+    const newMessage = new Message({
+      userId,
+      name,
+      email,
+      subject,
+      message,
+    });
+
+    await newMessage.save();
+    res.json({ success: true, message: 'Message sent successfully' });
+  } catch (error) {
+    console.error('Error saving message:', error);
+    res.status(500).json({ success: false, message: 'Error sending message' });
+  }
+});
+
+
+
 app.listen(port, (error) => {
     if (!error) {
         console.log("Server running on port " + port);
