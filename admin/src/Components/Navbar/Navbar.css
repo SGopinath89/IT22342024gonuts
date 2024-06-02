@@ -1,30 +1,27 @@
-.navbar{
+.navbar {
     display: flex;
     align-items: center;
     justify-content: space-between;
     padding: 5px 50px;
     box-shadow: 0 1px 3px -2px #000;
-    margin-bottom: 1px;
-    background: #edf3995b;
+    background: #edf3995b;  
 }
 
-.logo{
+.logo {
     display: flex;
     flex-direction: column;
 }
 
-h3{
+h3 {
     color: #ec7d8a;
     margin-top: -22px;
     margin-left: 60px;
-
 }
 
-.nav-logo{
+.nav-logo {
     width: 200px;
 }
 
-.nav-profile{
+.nav-profile {
     width: 60px;
-    
 }
