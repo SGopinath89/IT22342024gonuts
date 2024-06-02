@@ -44,6 +44,10 @@
     background-color: rgba(101, 158, 233, 0.596);
 }
 
+.navbar.pp{
+    background-color: #c27df39c;
+}
+
 .navbar .logo {
     width: 200px;
 }

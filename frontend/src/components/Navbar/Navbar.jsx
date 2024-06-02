@@ -51,6 +51,8 @@ const Navbar = () => {
                 return 'g1';
             case '/track-order':
                 return 'r';
+            case '/contact':
+                return 'pp';
             default:
                 if (/^\/product\/\d+$/.test(location.pathname)) { // Match /product/:productId pattern
                     return 'b';

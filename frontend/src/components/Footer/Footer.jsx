@@ -21,6 +21,8 @@ const Footer = () => {
                 return 'green';
             case '/cart':
                 return 'lightgreen';
+            case '/contact':
+                return 'pp';
             default:
                 return '';
         }
