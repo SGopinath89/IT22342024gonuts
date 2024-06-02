@@ -1,9 +1,13 @@
 import React, { useState, useEffect } from 'react';
+import Modal from 'react-modal';
 import './Orders.css';
 import orders_icon from '../../assets/parcel_icon.png';
 
 const Orders = () => {
   const [orders, setOrders] = useState([]);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [selectedOrder, setSelectedOrder] = useState(null);
+  const [successMessage, setSuccessMessage] = useState('');
 
   const fetchAllOrders = async () => {
     try {
@@ -22,23 +26,59 @@ const Orders = () => {
   };
 
   const statusHandler = async (event, orderId) => {
+    if (event.target.value === 'Delivered') {
+      setSelectedOrder(orderId);
+      setIsModalOpen(true);
+    } else {
+      try {
+        const response = await fetch('http://localhost:4000/status', {
+          method: 'POST', // Ensure this matches your backend API method
+          headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            orderId: orderId,
+            status: event.target.value,
+          }),
+        });
+
+        const data = await response.json();
+
+        if (data.success) {
+          await fetchAllOrders();
+        } else {
+          alert("Error updating order status");
+        }
+      } catch (error) {
+        console.error("Error:", error);
+        alert("Error updating order status");
+      }
+    }
+  };
+
+  const confirmRemoveOrder = async () => {
     try {
       const response = await fetch('http://localhost:4000/status', {
-        method: 'POST', // Ensure this matches your backend API method
+        method: 'POST',
         headers: {
           'Accept': 'application/json',
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-          orderId: orderId,
-          status: event.target.value,
+          orderId: selectedOrder,
+          status: 'Delivered',
         }),
       });
 
       const data = await response.json();
 
       if (data.success) {
-        await fetchAllOrders();
+        setOrders(orders.filter(order => order._id !== selectedOrder));
+        setIsModalOpen(false);
+        setSelectedOrder(null);
+        setSuccessMessage(`Order No.${selectedOrder} successfully removed.`);
+        setTimeout(() => setSuccessMessage(''), 3000); // Hide the message after 3 seconds
       } else {
         alert("Error updating order status");
       }
@@ -48,6 +88,11 @@ const Orders = () => {
     }
   };
 
+  const closeModal = () => {
+    setIsModalOpen(false);
+    setSelectedOrder(null);
+  };
+
   useEffect(() => {
     fetchAllOrders();
   }, []);
@@ -55,10 +100,11 @@ const Orders = () => {
   return (
     <div className="order add">
       <h1>Orders</h1>
+      {successMessage && <div className="success-message">{successMessage}</div>}
       <div className="order-list">
         {orders.map((order, index) => (
           <div key={index} className="order-item">
-            <img src={orders_icon} alt="" />
+            <p>No.{order.orderId}</p>
             <div>
               <p className='order-item-food'>
                 {order.items.map((item, index) => {
@@ -87,6 +133,22 @@ const Orders = () => {
           </div>
         ))}
       </div>
+
+      <Modal
+        isOpen={isModalOpen}
+        onRequestClose={closeModal}
+        contentLabel="Confirm Order Removal"
+        ariaHideApp={false}
+        className="Modal"
+        overlayClassName="Overlay"
+      >
+        <h2>Order Completed</h2>
+        <p>Do you want to remove this order from the list?</p>
+        <div className="modal-buttons">
+          <button onClick={confirmRemoveOrder} className='yes'>Yes</button>
+          <button onClick={closeModal} className='no'>No</button>
+        </div>
+      </Modal>
     </div>
   );
 };
