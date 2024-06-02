@@ -66,7 +66,7 @@ const Navbar = () => {
                 <li onClick={() => handleMenuClick('/')} className={menu === "/" ? "active" : ""}><Link to='/'>Home</Link></li>
                 <li onClick={() => handleMenuClick('/allcategory')} className={menu === "/allcategory" ? "active" : ""}><Link to='/allcategory'>Menu</Link></li>
                 <li onClick={() => handleMenuClick('/about')} className={menu === "/about" ? "active" : ""}><Link to='/about'>About</Link></li>
-                <li onClick={() => handleMenuClick('/contact')} className={menu === "/contact" ? "active" : ""}>Contact</li>
+                <li onClick={() => handleMenuClick('/contact')} className={menu === "/contact" ? "active" : ""}><Link to='/contact'>Contact</Link></li>
             </ul>
 
             <div className="navbar-right">
