@@ -67,6 +67,7 @@
 .loginSignup-login span {
     font-size: 18px;
     cursor: pointer;
+    color: aliceblue;
 }
 
 .loginSignup-login span:hover {
