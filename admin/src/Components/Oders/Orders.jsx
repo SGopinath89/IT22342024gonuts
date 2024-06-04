@@ -1,13 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import Modal from 'react-modal';
 import './Orders.css';
-import orders_icon from '../../assets/parcel_icon.png';
 
 const Orders = () => {
   const [orders, setOrders] = useState([]);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedOrder, setSelectedOrder] = useState(null);
-  const [successMessage, setSuccessMessage] = useState('');
+  const [successMessage, setSuccessMessage] = useState(''); 
 
   const fetchAllOrders = async () => {
     try {
@@ -16,10 +15,12 @@ const Orders = () => {
 
       if (data.success) {
         setOrders(data.data);
-      } else {
+      } 
+      else {
         alert("Error fetching orders");
       }
-    } catch (error) {
+    } 
+    catch (error) {
       console.error("Error:", error);
       alert("Error fetching orders");
     }
@@ -32,7 +33,7 @@ const Orders = () => {
     } else {
       try {
         const response = await fetch('http://localhost:4000/status', {
-          method: 'POST', // Ensure this matches your backend API method
+          method: 'POST', 
           headers: {
             'Accept': 'application/json',
             'Content-Type': 'application/json',
@@ -99,7 +100,6 @@ const Orders = () => {
 
   return (
     <div className="order add">
-      <h1>Orders</h1>
       {successMessage && <div className="success-message">{successMessage}</div>}
       <div className="order-list">
         {orders.map((order, index) => (
