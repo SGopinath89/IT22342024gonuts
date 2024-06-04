@@ -450,6 +450,19 @@ app.post('/contact', fetchUser, async (req, res) => {
 
 
 
+//list messages endpoint creation
+app.get('/messages', async (req, res) => {
+    try {
+        const messages = await Message.find({});
+        res.json({ success: true, data: messages });
+    } catch (error) {
+        console.log(error);
+        res.json({ success: false, message: "Error" });
+    }
+});
+
+
+
 app.listen(port, (error) => {
     if (!error) {
         console.log("Server running on port " + port);
