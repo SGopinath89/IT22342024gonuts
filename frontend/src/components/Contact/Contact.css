@@ -70,10 +70,10 @@
   }
 
   
-  
-  /* Modal Styles */
   .modal {
     position: absolute;
+    width: 400px;
+    line-height: 100px;
     top: 50%;
     left: 50%;
     right: auto;
