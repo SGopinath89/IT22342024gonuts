@@ -36,7 +36,7 @@ const Item = (props) => {
         isOpen={isModalOpen}
         onRequestClose={closeModal}
         contentLabel="Login Required"
-        className="modal"
+        className="modal1"
         overlayClassName="modal-overlay"
       >
         <h2>Please Login</h2>

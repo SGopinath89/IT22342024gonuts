@@ -61,7 +61,7 @@
 }
 
 
-.modal {
+.modal1 {
 display: flex;
 flex-direction: column;
 position: fixed;
@@ -100,7 +100,7 @@ margin-top: 0;
 margin: 10px 0;
 }
   
-.modal button {
+.modal1 button {
 margin-right: 10px;
 padding: 10px 20px;
 border: none;
@@ -110,15 +110,15 @@ color: white;
 cursor: pointer;
 }
 
-.modal button:hover{
+.modal1 button:hover{
     background: #257d3f;
 }
 
-.modal button:last-of-type {
+.modal1 button:last-of-type {
 background: #6c757d;
 }
 
-.modal button:last-of-type:hover {
+.modal1 button:last-of-type:hover {
     background: #ad3737;
     }
 
