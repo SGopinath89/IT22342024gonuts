@@ -8,7 +8,7 @@ The purpose of this project is to develop a web service using modern technologie
 JavaScript, Node.js, Expo, and MongoDB
 ## Installation
 
-This project uses npm for dependency management. To install the required dependencies, run the following command in terminal:
+This project uses npm for dependency management. To install the required dependencies, run the following command in each terminal(frontend, backend, admin):
 
 ```bash
 npm install
