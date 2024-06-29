@@ -23,7 +23,14 @@ const Footer = () => {
                 return 'lightgreen';
             case '/contact':
                 return 'pp';
+            case '/paymentportal':
+                return 'gg';
+            case '/track-order':
+                return 'r';
             default:
+                if (/^\/product\/\d+$/.test(location.pathname)) { // Match /product/:productId pattern
+                    return 'b';
+                }
                 return '';
         }
     };

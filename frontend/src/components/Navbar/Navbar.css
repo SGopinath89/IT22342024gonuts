@@ -9,8 +9,13 @@
 }
 
 .navbar.pink {
-    background-color: #f288b4af;
+    background-color: #e7d491;
 }
+
+.navbar.gg {
+    background-color: #0692459a;
+}
+
 
 .navbar.yellow {
     background-color: #ddc678ba;
@@ -37,7 +42,7 @@
 }
 
 .navbar.r{
-    background-color: rgba(101, 233, 105, 0.596);
+    background-color: rgba(48, 181, 101, 0.699);
 }
 
 .navbar.b{

@@ -45,13 +45,6 @@ const CartItems = () => {
                     })}
                     <div className="cartitems-down">
                         
-                        <div className="cartitems-promocode">
-                            <p>If you have a promo code, Enter it here.</p>
-                            <div className="cartitem-promobox">
-                                <input type="text" placeholder='Promo Code'/>
-                                <button>Submit</button>
-                            </div>
-                        </div>
 
                         <div className="cartitems-total">
                             <h1>Cart Totals</h1>

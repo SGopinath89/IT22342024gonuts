@@ -29,7 +29,7 @@ const AllCategory = () => {
         <div className="card card3">
             <img src={assets.iclairs} alt="" />
             <div className="name">
-                <b>Iclairs</b>
+                <b>Eclairs</b>
             </div> 
         </div>
         </Link>

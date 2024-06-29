@@ -53,8 +53,8 @@ const Messages = () => {
       <div className="message-list">
         {messages.map((message) => (
           <div className="message" key={message._id}>
-            <p>User ID: {message.userId}</p>
-            <p>Message: <strong>{message.message}</strong></p>
+            <p><strong>Username:</strong> {message.name}</p>
+            <p><strong>Message:</strong> {message.message}</p>
             <img
               src={selectedMessages.has(message._id) ? marked : mark}
               alt="Mark/Unmark message"

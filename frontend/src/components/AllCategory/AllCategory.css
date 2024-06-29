@@ -1,5 +1,5 @@
 .all-category {
-    background-color: #f4c5d8;
+    background-color: #ebdca7f3;
     margin: 1px auto;
     height: 100vh;
     background-size: contain;
@@ -13,6 +13,8 @@
 .card img {
     width: 200px;
     height: 150px;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
 }
 
 .card {
@@ -24,6 +26,7 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+    border-radius: 10px;
 }
 
 .card1:hover{

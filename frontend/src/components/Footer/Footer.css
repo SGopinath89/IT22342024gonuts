@@ -13,7 +13,7 @@
 }
 
 .footer.pink {
-    background-color: #f288b4af;
+    background-color: #ecd893;
 }
 
 .footer.yellow {
@@ -24,11 +24,23 @@
     background-color: #dd7878b4;
 }
 
+.footer.gg {
+    background-color: #0692459a;
+}
 .footer.lightgreen {
     background-color: #72d3b6b3;
 }
 .footer.pp {
     background-color: #c27df39c;
+}
+
+.footer.r {
+    background-color: rgba(48, 181, 101, 0.699);
+}
+
+
+.footer.b{
+    background-color: rgba(101, 158, 233, 0.596);
 }
 
 .footer-logo{

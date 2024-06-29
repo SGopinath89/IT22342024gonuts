@@ -141,7 +141,7 @@ const PlaceOrder = () => {
         <input
           type="text"
           name="street"
-          placeholder='Street'
+          placeholder='House Number'
           value={data.street}
           onChange={onChangeHandler}
           className={errors.street ? 'error' : ''}
@@ -151,7 +151,7 @@ const PlaceOrder = () => {
           <input
             type="text"
             name="city"
-            placeholder='City'
+            placeholder='Street Name'
             value={data.city}
             onChange={onChangeHandler}
             className={errors.city ? 'error' : ''}
@@ -159,7 +159,7 @@ const PlaceOrder = () => {
           <input
             type="text"
             name="state"
-            placeholder='State'
+            placeholder='City'
             value={data.state}
             onChange={onChangeHandler}
             className={errors.state ? 'error' : ''}
@@ -177,7 +177,7 @@ const PlaceOrder = () => {
           <input
             type="text"
             name="country"
-            placeholder='Country'
+            placeholder='Province'
             value={data.country}
             onChange={onChangeHandler}
             className={errors.country ? 'error' : ''}

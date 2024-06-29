@@ -6,12 +6,13 @@
     align-items: center;
     justify-content: center;
     padding: 20px;
-    background-color: #f5f5f5;
+    background-color: #0d864e65;
     min-height: 100vh;
   }
   
   .payment-form {
-    background: white;
+    background: rgba(255, 255, 255, 0.272);
+    margin-top: -50px;
     padding: 30px;
     border-radius: 8px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);

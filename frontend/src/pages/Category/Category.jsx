@@ -34,7 +34,7 @@ const Category = (props) => {
           className={`b3 ${selectedCategory === 'iclairs' ? 'active' : ''}`}
           onClick={() => handleCategoryClick('iclairs')}
         >
-          Iclairs
+          Eclairs
         </Link>
       </div>
       <div className="category-products">
